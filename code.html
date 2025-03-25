@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Showroom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #001928, #9dc3b2);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .grid-container img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+        }
+        .grid-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.3);
+        }
+        .bike-details {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3);
+            display: none;
+        }
+        .actions button {
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .actions button:hover {
+            opacity: 0.8;
+        }
+        .actions button:nth-child(1) {
+            background-color: #ffcc00;
+        }
+        .actions button:nth-child(2) {
+            background-color: #007bff;
+            color: white;
+        }
+        .actions button:nth-child(3) {
+            background-color: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bike Showroom</h1>
+        <div class="grid-container" id="bikeGallery"></div>
+        <div class="bike-details" id="bikeDetails">
+            <h2 id="bikeName"></h2>
+            <p id="bikeDescription"></p>
+            <div class="actions">
+                <button onclick="addToCart()">🛒 Add to Cart</button>
+                <button onclick="buyNow()">💳 Buy Now</button>
+                <button onclick="addToWishlist()">❤️ Wishlist</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const bikes = [
+            { name: "Yamaha R15", image: "bike1.webp", description: "A sporty and stylish ride with powerful performance." },
+            { name: "Kawasaki Ninja", image: "bike2.jpeg", description: "A high-speed beast for adrenaline lovers." },
+            { name: "Royal Enfield Classic", image: "bike3.jpg", description: "A vintage-inspired, powerful cruiser." },
+            { name: "Ducati Panigale", image: "bike4.jpg", description: "A premium sports bike with top-notch performance." },
+            { name: "Harley Davidson", image: "bike5.jpg", description: "A classic cruiser with a legendary feel." },
+            { name: "KTM Duke 390", image: "bike6.jpg", description: "An aggressive streetfighter with great agility." },
+            { name: "Suzuki Hayabusa", image: "bike7.jpg", description: "A superbike known for its high-speed capabilities." },
+            { name: "Honda CBR650R", image: "bike8.jpg", description: "A perfect blend of style and performance." },
+            { name: "BMW S1000RR", image: "bike9.jpg", description: "A German engineering marvel with race-ready power." },
+            { name: "Aprilia RSV4", image: "bike10.jpg", description: "An Italian masterpiece built for the track." }
+        ];
+
+        const gallery = document.getElementById("bikeGallery");
+        const bikeDetails = document.getElementById("bikeDetails");
+        const bikeName = document.getElementById("bikeName");
+        const bikeDescription = document.getElementById("bikeDescription");
+
+        bikes.forEach((bike, index) => {
+            const img = document.createElement("img");
+            img.src = bike.image;
+            img.alt = bike.name;
+            img.addEventListener("click", () => showBikeDetails(index));
+            gallery.appendChild(img);
+        });
+
+        function showBikeDetails(index) {
+            const bike = bikes[index];
+            bikeName.textContent = bike.name;
+            bikeDescription.textContent = bike.description;
+            bikeDetails.style.display = "block";
+        }
+
+        function addToCart() {
+            alert("🛒 " + bikeName.textContent + " added to cart!");
+        }
+
+        function buyNow() {
+            alert("💳 Redirecting to purchase page for " + bikeName.textContent);
+        }
+
+        function addToWishlist() {
+            alert("❤️ " + bikeName.textContent + " added to your wishlist!");
+        }
+    </script>
+</body>
+</html>
